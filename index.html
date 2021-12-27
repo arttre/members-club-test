@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member's club</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<h1 align="center">Welcome to the Club!</h1>
+<h2>New member</h2>
+<form id="add_member">
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+    </div>
+
+    <div style="padding-top:15px">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+    </div>
+
+    <div style="padding-top:15px">
+        <input type="submit" id="add" value="Add">
+        <input type="button" id="clear" value="Clear">
+    </div>
+
+</form>
+
+<div style="padding-top:15px">
+
+    <table width="50%" border="1" cellspacing="1" cellpadding="5" id="main_table" style="text-align:center">
+
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Registration date</th>
+    </tr>
+
+    </table>
+
+</div>
+
+<script type="text/javascript">
+
+    const form = document.getElementById("add_member")
+
+    let url = 'http://127.0.0.1:8000'
+
+    form.onsubmit = function(e){
+
+        e.preventDefault();
+        let formData = new FormData(form);
+
+        axios
+        .post(url+'/add_member',
+        {
+            "email": formData.get("email"),
+            "name": formData.get("name")
+        })
+        .then(response => {
+
+            let added_row = document.getElementById("main_table").insertRow(-1);
+
+            added_row.insertCell(0).innerHTML = response.data["date"];
+            added_row.insertCell(0).innerHTML = response.data["email"];
+            added_row.insertCell(0).innerHTML = response.data["name"];
+            added_row.insertCell(0).innerHTML = document.getElementById("main_table").rows.length-1;
+
+        })
+        .catch(error => {
+            window.alert(error.response.data["detail"])})
+    }
+
+    const button_clear = document.getElementById("clear")
+    button_clear.onclick = function(){
+
+    axios
+    .delete(url+'/clear')
+    .then(response => {
+        let main_table = document.getElementById("main_table")
+        let len = main_table.rows.length;
+
+        for(let i = 1; i < len; i++){
+            main_table.deleteRow(1)
+        }
+    })
+    }
+
+    window.onload = function(){
+
+    axios
+    .get(url+'/get_all_members')
+    .then(response =>{
+
+        let i = 1;
+
+        for (let [key, value] of Object.entries(response.data)) {
+            let added_row = document.getElementById("main_table").insertRow(-1);
+            added_row.insertCell(0).innerHTML = value[1]
+            added_row.insertCell(0).innerHTML = key;
+            added_row.insertCell(0).innerHTML = value[0];
+            added_row.insertCell(0).innerHTML = i;
+            i+=1;
+        }
+    })
+
+    }
+
+</script>
+
+</body>
+</html>
