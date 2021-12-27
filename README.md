@@ -1,8 +1,8 @@
 # members-club-test
 
-##Members club application
+## Members club application
 
-###Installation
+### Installation
 In terminal:
 
 ```git clone https://github.com/arttre/members-club-test.git -b master``` -- installing repository
@@ -13,7 +13,7 @@ In terminal:
 
 *_pip_ must be installed.
 
-###Run
+### Run
 
 Inside _main directory_:
 ```python3 -m uvicorn main:app```
@@ -24,7 +24,7 @@ Here it is, you can work with application.
 
 *of course, _python3_ must be installed.
 
-###Testing
+### Testing
 
 Simply use ```pytest``` command in _main directory_.
 
