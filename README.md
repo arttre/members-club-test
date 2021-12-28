@@ -26,6 +26,6 @@ Here it is, you can work with application.
 
 ### Testing
 
-Simply use ```pytest``` command in _main directory_.
+Simply use ```pytest``` command in a _main directory_.
 
 To export testing results to a file use ```pytest > test_results.log``` command.
