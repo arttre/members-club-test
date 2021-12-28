@@ -15,6 +15,8 @@ In terminal:
 
 ### Run
 
+I recommend you to use a virual environment (```python3 -m venv env```).
+
 Inside _main directory_:
 ```python3 -m uvicorn main:app```
 to run our local server.
