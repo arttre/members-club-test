@@ -2,6 +2,8 @@
 
 ## Members club application
 
+I recommend you to use a virual environment (```python3 -m venv env```).
+
 ### Installation
 In terminal:
 
@@ -14,8 +16,6 @@ In terminal:
 *_pip_ must be installed.
 
 ### Run
-
-I recommend you to use a virual environment (```python3 -m venv env```).
 
 Inside _main directory_:
 ```python3 -m uvicorn main:app```
